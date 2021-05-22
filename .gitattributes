@@ -1,2 +1,4 @@
 *.pbxproj binary merge=union
 *.hdf5 filter=lfs diff=lfs merge=lfs -text
+AI filter=lfs diff=lfs merge=lfs -text
+AI/yumyum-classify/bestmodel_61class.hdf5 filter=lfs diff=lfs merge=lfs -text
