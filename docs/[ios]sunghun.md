@@ -632,13 +632,21 @@ p.x = 12
 
 ## codable 프로토콜
 
-- 처음에는 이걸 왜쓰나 싶었다. 그냥 alamofire로 받아온 JSON객체를 파싱해서 데이터 객체로 저장하고 예를들면 NSDictionary라든지 JSONArray라면 NSArray라든지 그런데 계속 하나씩 다 파싱하다보니까 효율성이 너무 떨어지는 걸 느꼈고 받아온 데이터를 struct로 지정해놓고 서버에서 받아온 데이터를 내가 struct에 지정한 타입으로 틀 찍어내듯이 하면 간편하다는 것을 알았다. 
+> 처음에는 이걸 왜쓰나 싶었다. 그냥 alamofire로 받아온 JSON객체를 파싱해서 데이터 객체로 저장하고 예를들면 NSDictionary라든지 JSONArray라면 NSArray라든지 그런데 계속 하나씩 다 파싱하다보니까 효율성이 너무 떨어지는 걸 느꼈고 받아온 데이터를 struct로 지정해놓고 서버에서 받아온 데이터를 내가 struct에 지정한 타입으로 틀 찍어내듯이 하면 간편하다는 것을 알았다. 
 
 - 주로 서버에서 받아온 JSON을 decoder를 이용해서 디코딩하는경우가 많기 때문에 다음과 같이 하면된다.
-
 - ![image-20210501021116231]([ios]sunghun.assets/image-20210501021116231.png)
-
 - 여기서 decode 코드이 원형이 Person.self가 들어간 자리의 type: 인데 이는 우리가 JSON으로 만들고 싶은것의 타입을 넣어주면된다. 그래서 Person.self로 Person 클래스, 혹은 구조체의 타입을 넣어주면 타입을 지정해 줄 수가 있다.
+
+### 이해가지 않았던 부분
+
+![image-20210521150228157]([ios]sunghun.assets/image-20210521150228157.png)
+
+- 위의 코드에서 **responseJSON** 이 응답을 JSON으로 받아서 response로 저장되는 값이 JSON데이터인줄 알았으나 그게 아니라 통신에 대한 모든 값들이 들어있는 HTTP 응답이다. 따라서 `response.result`를 들어가 통신 성공, 실패 여부를 확인 할 수 있어야한다. **즉, responseJSON 이라해서 JSON 형식으로 값이 변경되서 오는게 아니다! 그래서  JSON형식으로 바꿔주고 swift객체로  디코더블 해줘야한다!!.**
+
+
+
+
 
 
 
@@ -914,3 +922,13 @@ self.present(navigationController, animated: true)
 ## 서버로 비디오 및 이미지 요청 보낼시
 
 > 반드시 헤더랑, 바디에 뭘담아 줘야할지 생각하고 하자... 그리고 ios에서는 dump다 찍어보고 success로 오더라도 400에러로 bedrequest올수도 있으니까 꼭 확인 것
+
+
+
+## NotificationCenter를 통해서 값을 전달하는 방법
+
+> delegate를 활용해서 해당 ViewController에 값을 전달하는 방법도 있지만 NotificationCenter로도 값을 전달해서 사용할 수 있다.
+
+- 사용처 : 사실 delegate로 값을 전달해도 상관 없을 것 같긴하다. 
+- 약간 무언가 액션이 있었을때, 이 액션이 진행되었으니 담당자들이 처리하기 바람! 이런 느낌인거 같은데
+- 동시 다발적으로 여러 곳에 알리는 것이 가능하다는 것이 장점이다. 

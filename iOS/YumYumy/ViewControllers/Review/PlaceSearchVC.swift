@@ -80,7 +80,6 @@ extension PlaceSearchVC: UISearchBarDelegate {
         self.resultTableView.reloadData()
         let searchKey = searchBar.text!
         WebApiManager.shared.searchPlace(searchKey: searchKey, logitudeX: longitude!, latitudeY: latitude!) { (result) in
-            dump(result["documents"])
             self.distance = []
             self.results = result["documents"].arrayValue.compactMap({Place(json: $0)})
             self.results.map({(place:Place) -> Place in
