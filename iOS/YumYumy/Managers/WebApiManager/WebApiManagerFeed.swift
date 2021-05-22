@@ -178,9 +178,9 @@ extension WebApiManager {
         }
         
     }
-//    
+//
 //    func recommendFeedList(userId: Int, success: @escaping (Dictionary) -> Void, failure : @escaping (Error) -> Void) {
-//        
+//
 //    }
         
     
