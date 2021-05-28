@@ -32,6 +32,12 @@ class HomeVC: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         setLayout()
+        WebApiManager.shared.getRecommendFeedList(userId: 59){
+            (result) in
+            print(result)
+        } failure: { (error) in
+            print(error.localizedDescription)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

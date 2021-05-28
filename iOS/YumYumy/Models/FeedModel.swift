@@ -8,6 +8,27 @@
 import Foundation
 import SwiftyJSON
 
+
+struct BaseModel: Codable {
+    var status: String?
+    var message: String?
+    var data: [Feed]?
+    // json key가 아닌 내가 원하는 이름으로 지정해 줄 수 있게 해주는 프로토콜
+    enum CodingKeys: String, CodingKey {
+        case status = "status"
+        case message = "message"
+        case data = "data"
+    }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+
+        status = try values.decode(String.self, forKey: .status)
+        message = try values.decode(String.self, forKey: .message)
+        data = try values.decode([Feed].self, forKey: .data)
+    }
+}
+
 struct Feed {
     var userId: Int?
     var title: String?
@@ -23,7 +44,8 @@ struct Feed {
     var isLike: Bool?
     var placeId: Int?
     var user: User?
-
+    var createdDate : String?
+    var modifiedDate : String?
     
     // Encodable
     var place: Place?

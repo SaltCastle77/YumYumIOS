@@ -114,7 +114,7 @@ class PeopleFeedCell: UICollectionViewCell {
         userLabel.text = "@" + (feed.user?.nickname)! as String
         reviewLabel.text = feed.content
         checkLike = feed.isLike!
-        if let arr = feed.place?.address.components(separatedBy: " ") {
+        if let arr = feed.place?.address!.components(separatedBy: " ") {
             print(arr)
             if arr.count > 1 {
                 placeLabel.text = String(feed.place?.name ?? " ") +

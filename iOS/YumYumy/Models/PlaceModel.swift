@@ -9,10 +9,10 @@ import Foundation
 import SwiftyJSON
 
 struct Place: Codable {
-    var address: String
-    var locationX: Double
-    var locationY: Double
-    var name: String
+    var address: String?
+    var locationX: Double?
+    var locationY: Double?
+    var name: String?
     var phone: String?
     var id: Int?
     

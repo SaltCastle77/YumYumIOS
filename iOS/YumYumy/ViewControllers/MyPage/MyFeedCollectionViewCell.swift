@@ -135,7 +135,7 @@ class MyFeedCollectionViewCell: UICollectionViewCell {
         myNameLabel.text = "@" + (feed.user?.nickname)! as String
         myReviewLabel.text = feed.content
         
-        if let arr = feed.place?.address.components(separatedBy: " ") {
+        if let arr = feed.place?.address!.components(separatedBy: " ") {
             if arr.count > 1 {
                 myPlaceLabel.text = String(feed.place?.name ?? " ") +
                     " | \(String(arr[0])) \(String(arr[1]))"

@@ -153,10 +153,15 @@ extension MypageVC: UICollectionViewDataSource {
             let myfeed = reverseMyFeedList[indexPath.item]
             let imageurl:URL = myfeed.thumbnailPath!
             DispatchQueue.global().async {
-                let data = try? Data(contentsOf: imageurl)
+                guard let data = try? Data(contentsOf: imageurl) else {
+                    print("썸네일 테이터가 없습니다.")
+                    return }
                 DispatchQueue.main.async {
-                    let beforeimage = UIImage(data: data!)
-                    image = beforeimage?.fixedOrientation().imageRotatedByDegrees(degrees: 90.0)
+                    if let beforeimage = UIImage(data: data) {
+                        image = beforeimage.fixedOrientation().imageRotatedByDegrees(degrees: 90.0)
+                    } else {
+                        image = UIImage(named: "ic_delete")
+                    }
                     if myfeed.isCompleted! == false {
                         let opacityimage = image?.image(alpha: 0.3)
                         cell.foodImageView.image = opacityimage
@@ -169,9 +174,12 @@ extension MypageVC: UICollectionViewDataSource {
             let myfeed = reverseMyLikeFeedList[indexPath.item]
             let imageurl:URL = myfeed.thumbnailPath!
             DispatchQueue.global().async {
-                let data = try? Data(contentsOf: imageurl)
+                guard let data = try? Data(contentsOf: imageurl) else {
+                    print("썸네일 데이터가 없습니다.")
+                    return
+                }
                 DispatchQueue.main.async {
-                    let beforeimage = UIImage(data: data!)
+                    let beforeimage = UIImage(data: data)
                     image = beforeimage?.fixedOrientation().imageRotatedByDegrees(degrees: 90.0)
                     if myfeed.isCompleted! == false {
                         let opacityimage = image?.image(alpha: 0.3)

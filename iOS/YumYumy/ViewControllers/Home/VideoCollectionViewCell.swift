@@ -126,7 +126,7 @@ class VideoCollectionViewCell: UICollectionViewCell{
         reviewLabel.text = feed.content
         
         
-        if let arr = feed.place?.address.components(separatedBy: " ") {
+        if let arr = feed.place?.address!.components(separatedBy: " ") {
             if arr.count > 1 {
                 placeLabel.text = String(feed.place?.name ?? " ") +
                     " | \(String(arr[0])) \(String(arr[1]))"

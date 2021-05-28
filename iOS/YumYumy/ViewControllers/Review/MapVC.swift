@@ -25,7 +25,7 @@ class MapVC: UIViewController, MTMapViewDelegate {
         vc.poiItem!.itemName = "Marker"
         vc.poiItem!.showDisclosureButtonOnCalloutBalloon = true
         vc.poiItem!.markerSelectedType = .redPin
-        vc.poiItem!.mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: place.locationY, longitude:  place.locationX))
+        vc.poiItem!.mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: place.locationY!, longitude:  place.locationX!))
 
         return vc
     }

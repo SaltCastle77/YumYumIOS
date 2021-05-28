@@ -14,6 +14,8 @@ struct User: Codable {
     var nickname: String?
     var introduction: String?
     var email: String?
+    var createDate : String?
+    var modifiedDate : String?
     
     init () {
         

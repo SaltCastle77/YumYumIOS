@@ -178,10 +178,31 @@ extension WebApiManager {
         }
         
     }
-//
-//    func recommendFeedList(userId: Int, success: @escaping (Dictionary) -> Void, failure : @escaping (Error) -> Void) {
-//
-//    }
+
+    func getRecommendFeedList(userId: Int, success: @escaping (BaseModel) -> Void, failure : @escaping (Error) -> Void) {
+        let url = "\(domainUrl)\(feedUrl)list/recommend/\(userId)"
+        
+        AF.request(url, method: .get).responseJSON{(response) in
+            switch response.result {
+            case .success(let obj):
+                do {
+                    print(obj)
+                    let dataJSON = try JSONSerialization.data(withJSONObject: obj, options: .prettyPrinted)
+                    let result = try JSONDecoder().decode(BaseModel.self, from: dataJSON)
+                    print("들ㅇ어오나요?")
+                    print(result)
+                    success(result)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            case .failure(_):
+                print("응답실패")
+                let error: Error = response.error!
+                failure(error)
+                break
+            }
+        }
+    }
         
     
 }

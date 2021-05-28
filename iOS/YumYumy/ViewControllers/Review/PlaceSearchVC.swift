@@ -84,7 +84,7 @@ extension PlaceSearchVC: UISearchBarDelegate {
             self.results = result["documents"].arrayValue.compactMap({Place(json: $0)})
             self.results.map({(place:Place) -> Place in
                 var userLocation = CLLocation(latitude: self.latitude!, longitude: self.longitude!)
-                var secondLocation = CLLocation(latitude: place.locationY, longitude: place.locationX)
+                var secondLocation = CLLocation(latitude: place.locationY!, longitude: place.locationX!)
                 let distancePlace:CLLocationDistance = userLocation.distance(from: secondLocation)
                 self.distance.append(distancePlace)
                 return place
